@@ -21,7 +21,6 @@
     "@mui/x-data-grid": "^6.16.2",
     "aws-sdk": "^2.1473.0",
     "axios": "^1.5.1",
-    "buffer": "^6.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-pro-sidebar": "^1.1.0-alpha.1",

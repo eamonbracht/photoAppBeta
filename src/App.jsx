@@ -5,7 +5,8 @@ import { getListOfFiles } from "./components/s3utils";
 import PhotoSidebar from "./components/sidebar";
 import ImageListTable from "./components/imageListTabls";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-import PhotoMosaic from "./components/photoMosaic";
+// import PhotoMosaic from "./components/photoMosaic";
+import MosaicTest from "./components/mosaicTest";
 function App() {
   useEffect(() => {
     getListOfFiles();
@@ -14,10 +15,12 @@ function App() {
     <>
       <div style={{ display: "flex", height: "100vh" }}>
         <PhotoSidebar />
-        <Routes>
-          <Route path="/table" element={<ImageListTable />} />
-          <Route path="/photo" element={<PhotoMosaic />} />
-        </Routes>
+        <div style={{ flexGrow: 1 }}>
+          <Routes>
+            <Route path="/table" element={<ImageListTable />} />
+            <Route path="/photos" element={<MosaicTest />} />
+          </Routes>
+        </div>
       </div>
     </>
   );

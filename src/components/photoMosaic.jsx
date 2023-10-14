@@ -1,48 +1,53 @@
 import React from "react";
-import { Buffer } from "buffer";
-import { JustifiedInfiniteGrid } from "@egjs/react-infinitegrid";
+import { MasonryInfiniteGrid } from "@egjs/react-infinitegrid";
 import { getListOfFiles, getFile } from "./s3utils";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import ImageCard from "./ImageCard";
 
-function encode(data) {
-  let buf = Buffer.from(data);
-  let base64 = buf.toString("base64");
-  return base64;
+function getItems(nextGroupKey, count) {
+  const nextItems = [];
+  const nextKey = nextGroupKey * count;
+
+  for (let i = 0; i < count; ++i) {
+    nextItems.push({ groupKey: nextGroupKey, key: nextKey + i });
+  }
+  return nextItems;
 }
-export default function PhotoMosaic() {
-  const [exampleImg, setExampleImg] = React.useState("");
 
+export default function PhotoMosaic() {
+  const [items, setItems] = React.useState(getItems(0, 10));
+  const [bucketItems, setBucketItems] = React.useState([]);
   React.useEffect(() => {
     getListOfFiles().then((res) => {
-      getFile(res[0].Key).then((img) => {
-        console.log("url", img);
-        console.log(typeof img);
-        setExampleImg(img);
-      });
+      setBucketItems(res);
     });
   }, []);
+  if (bucketItems.length !== 0) {
+    return (
+      // <div style={{ height: "500px", width: "800px", overflowY: "auto" }}>
+      <MasonryInfiniteGrid
+        className="container"
+        gap={5}
+        onRequestAppend={(e) => {
+          const nextGroupKey = (e.groupKey + 1 || 0) + 1;
 
-  return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia sx={{ height: 140 }} image={exampleImg} title="green iguana" />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
-  );
+          setItems([...items, ...getItems(nextGroupKey, 10)]);
+        }}
+      >
+        {items.map((item) => (
+          <ImageCard
+            data-grid-groupkey={item.groupKey}
+            key={item.key}
+            num={item.key}
+            bucketObject={bucketItems[item.key]}
+          />
+        ))}
+      </MasonryInfiniteGrid>
+      // </div>
+    );
+  }
 }
+
+/*
+Fetch all objects in bucket and save to a state
+Move getURL to the child class (ImageCard) so you are only passing a key to the child
+*/
