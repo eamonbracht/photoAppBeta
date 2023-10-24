@@ -4,6 +4,8 @@ import viteLogo from "/vite.svg";
 import { getListOfFiles } from "./components/s3utils";
 import PhotoSidebar from "./components/sidebar";
 import ImageListTable from "./components/imageListTabls";
+import AboutMe from "./components/AboutMe";
+import ContactMe from "./components/ContactMe";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 // import PhotoMosaic from "./components/photoMosaic";
 import MosaicTest from "./components/mosaicTest";
@@ -19,6 +21,8 @@ function App() {
           <Routes>
             <Route path="/table" element={<ImageListTable />} />
             <Route path="/photos" element={<MosaicTest />} />
+            <Route path="/about" element={<AboutMe />} />
+            <Route path="/contact" element={<ContactMe />} />
           </Routes>
         </div>
       </div>
