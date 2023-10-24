@@ -1,5 +1,6 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import { Box } from "@mui/material";
 import { getListOfFiles } from "./s3utils";
 
 const columns = [
@@ -19,8 +20,8 @@ export default function ImageListTable() {
     });
   }, []);
   return (
-    <div style={{ height: 300, alignSelf: "center" }}>
+    <Box sx={{ alignSelf: "center", m: 2, height: "95vh", width: "95%" }}>
       <DataGrid rows={rows} columns={columns} getRowId={getRowId} />
-    </div>
+    </Box>
   );
 }
