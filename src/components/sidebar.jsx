@@ -22,7 +22,7 @@ export default function PhotoSidebar(props) {
           <h2>KTL Photo</h2>
         </MenuItem>
         <MenuItem
-          component={<Link to="/photos" className="link" />}
+          component={<Link to="/photos/1" className="link" />}
           icon={<PhotoLibraryIcon />}
         >
           Photos

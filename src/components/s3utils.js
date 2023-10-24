@@ -18,13 +18,15 @@ export async function getListOfFiles() {
 
   const params = {
     Bucket: "photography-web-app-bucket",
+    Delimiter: "/",
+    Prefix: "thumbnail/",
   };
   const command = new ListObjectsCommand(params);
   //   const command = new ListBucketsCommand({});
   try {
     const data = await client.send(command);
     console.log(data);
-    return data.Contents;
+    return data.Contents.filter((item) => item.Key !== "thumbnail/");
   } catch (error) {
     console.log(error);
     return [];
@@ -52,12 +54,10 @@ export async function getFile(key) {
   try {
     // const data = await client.send(command);
     const url = await getSignedUrl(client, command, { expiresIn: 3600 });
-    console.log(url);
+    // console.log(url);
     return url;
   } catch (error) {
     console.log(error);
     return "";
-  } finally {
-    console.log("fml");
   }
 }
