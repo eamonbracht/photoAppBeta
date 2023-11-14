@@ -21,7 +21,7 @@ export default function PaginationPhotos() {
       setBucketItems(res);
     });
   }, []);
-  React.useState(() => console.log(page, typeof page), [page]);
+  React.useState(() => [page]);
   return (
     <Box
       sx={{
