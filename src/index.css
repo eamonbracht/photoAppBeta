@@ -68,3 +68,63 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.about-me {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.about-me header h1 {
+  text-align: center;
+  color: #444;
+}
+
+.portrait {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: block;
+  margin: 20px auto;
+}
+
+.story {
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.story h2 {
+  color: #555;
+}
+
+.portfolio {
+  margin-bottom: 20px;
+}
+
+.contact-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.contact-button {
+  background-color: #008cba;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contact-button:hover {
+  background-color: #005f73;
+}
+
+.react-pro-sidebar {
+  background-color: red /* Change to your desired color */
+}

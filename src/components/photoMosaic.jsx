@@ -24,20 +24,18 @@ export default function PhotoMosaic() {
       setBucketItems(res);
     });
   }, []);
+
   const getNextItems = async (nextGroupKey, nextBatch) => {
     const nextItems = getItems(nextGroupKey, nextBatch, bucketItems.length);
-    Promise.all(array.map(callback));
-    const withURLS = await Promise.all(getURLs());
-
-    console.log(withURLS);
-    setItems([...items, ...withURLS]);
+    const withURLs = await Promise.all(nextItems.map(getURLs));
+    setItems((prevItems) => [...prevItems, ...withURLs]);
   };
   const getURLs = (item) => {
-    getFile(bucketObject.Key).then((res) => {
+    return getFile(bucketItems[item.key].Key).then((res) => {
       return { ...item, URL: res };
     });
   };
-  React.useEffect(() => console.log(items), [items]);
+  React.useEffect(() => [items]);
   if (bucketItems.length !== 0) {
     return (
       <Box sx={{ width: "100%", height: "100%", overflowY: "auto" }}>
